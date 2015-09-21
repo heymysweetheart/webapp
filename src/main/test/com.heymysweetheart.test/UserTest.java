@@ -22,11 +22,7 @@ public class UserTest {
 
     @Test
     public void addUser() {
-        User user = new User();
-        user.setId(5);
-        user.setState(4);
-        user.setNickname("leo");
-
+        User user = new User(5,5,"tom");
         System.out.println(userService.insertUser(user));
     }
 }
