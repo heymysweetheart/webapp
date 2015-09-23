@@ -2,11 +2,13 @@ package com.credit.controller;
 
 import com.credit.model.Person;
 import com.credit.model.User;
+import com.credit.service.UserService;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +18,9 @@ import java.util.List;
 @Controller
 @RequestMapping("/")
 public class UserController {
+    @Resource
+    UserService userService;
+
     @RequestMapping("index")
     public String index() {
         return "index";
@@ -48,7 +53,7 @@ public class UserController {
 
     @RequestMapping(value = "/post", method = RequestMethod.POST)
     @ResponseBody //使用ResponseBody将函数的返回直接写入HttpResponse中。
-    public String postData(@ModelAttribute("person")Person person) {
+    public String postData(@ModelAttribute("person") Person person) {
         person.setbMR(person.getBMR(person));
         return person.toString();
     }
@@ -63,4 +68,12 @@ public class UserController {
         return person.toString();
     }
 
+    @RequestMapping(value = "/addUser", method = RequestMethod.GET)
+    @ResponseBody
+    public String addUser(@RequestParam("state") int state, @RequestParam("nickname") String nickname) {
+        User user = new User(10, state, nickname);
+        userService.insertUser(user);
+        return user.toString();
+    }
 }
+

@@ -59,6 +59,9 @@ public class Person {
         this.gender = gender;
     }
 
+    public Person() {
+    }
+
     public Person(String name, int age, double height, double weight, String gender) {
         this.name = name;
         this.age = age;
