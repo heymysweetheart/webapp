@@ -30,6 +30,15 @@ public class HttpClientExample {
     }
 
     @Test
+    public void testGetBMR() throws IOException {
+        CloseableHttpClient client = HttpClients.createDefault();
+        HttpGet httpGet = new HttpGet("http://localhost:8080/getBMR.do?name=leo&age=10&height=160.0&weight=50&gender=female");
+        CloseableHttpResponse response = client.execute(httpGet);
+        System.out.println(EntityUtils.toString(response.getEntity()));
+        client.close();
+    }
+
+    @Test
     public void testPostRequest() throws IOException {
         CloseableHttpClient httpClient = HttpClients.createDefault();
         HttpPost httpPost = new HttpPost("http://localhost:8080/post.do");

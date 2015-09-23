@@ -5,10 +5,7 @@ import com.credit.model.User;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,9 +47,18 @@ public class UserController {
     }
 
     @RequestMapping(value = "/post", method = RequestMethod.POST)
-
     @ResponseBody //使用ResponseBody将函数的返回直接写入HttpResponse中。
     public String postData(@ModelAttribute("person")Person person) {
+        person.setbMR(person.getBMR(person));
+        return person.toString();
+    }
+
+    @RequestMapping(value = "/getBMR", method = RequestMethod.GET)
+    @ResponseBody //使用ResponseBody将函数的返回直接写入HttpResponse中。
+    public String getData(@RequestParam("name") String name, @RequestParam("age") int age,
+                          @RequestParam("weight") double weight, @RequestParam("height") double height,
+                          @RequestParam("gender") String gender) {
+        Person person = new Person(name, age, height, weight, gender);
         person.setbMR(person.getBMR(person));
         return person.toString();
     }

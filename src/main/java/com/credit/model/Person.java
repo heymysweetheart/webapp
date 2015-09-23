@@ -59,6 +59,14 @@ public class Person {
         this.gender = gender;
     }
 
+    public Person(String name, int age, double height, double weight, String gender) {
+        this.name = name;
+        this.age = age;
+        this.height = height;
+        this.weight = weight;
+        this.gender = gender;
+    }
+
     @Override
     public String toString() {
         return "Person{" +
